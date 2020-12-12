@@ -8,15 +8,12 @@ case class Matrix(
   rowsNumber: Int,
   data: Array[Array[Double]]
 ) {
-
-  private final lazy val OUTPUT_SEPARATOR: String = List.fill(8)(" ").mkString
-
   def saveToFile(fileName: String): Unit = {
     val file = new File(fileName)
     val bufferedWriter = new BufferedWriter(new FileWriter(file))
 
     for (singleArray <- data) {
-      val rowString = singleArray.mkString(OUTPUT_SEPARATOR)
+      val rowString = singleArray.mkString(Matrix.OUTPUT_SEPARATOR)
       bufferedWriter.write(s"$rowString\n")
     }
 
@@ -33,6 +30,9 @@ case class Matrix(
 }
 
 object Matrix {
+
+  private final lazy val OUTPUT_SEPARATOR: String = List.fill(8)(" ").mkString
+
   def fromRawData(inputMatrix: Array[Array[Double]]): Matrix = {
     val nodesNumber = inputMatrix.length
 

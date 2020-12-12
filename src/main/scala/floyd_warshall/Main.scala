@@ -1,6 +1,6 @@
 package floyd_warshall
 
-import com.typesafe.config.{Config, ConfigFactory}
+import com.typesafe.config.ConfigFactory
 
 object Main {
 
