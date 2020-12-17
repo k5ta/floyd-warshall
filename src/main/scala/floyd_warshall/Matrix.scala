@@ -13,8 +13,10 @@ case class Matrix(
     val bufferedWriter = new BufferedWriter(new FileWriter(file))
 
     for (singleArray <- data) {
-      val rowString = singleArray.mkString(Matrix.OUTPUT_SEPARATOR)
-      bufferedWriter.write(s"$rowString\n")
+      val rowString = singleArray.map(String.format("%.3f", _)) // 3 symbols after separator
+                                 .mkString(Matrix.OUTPUT_COL_SEPARATOR)
+
+      bufferedWriter.write(s"$rowString${Matrix.OUTPUT_ROW_SEPARATOR}")
     }
 
     bufferedWriter.close()
@@ -31,7 +33,8 @@ case class Matrix(
 
 object Matrix {
 
-  private final lazy val OUTPUT_SEPARATOR: String = List.fill(8)(" ").mkString
+  private final val OUTPUT_COL_SEPARATOR: String = "\t"
+  private final val OUTPUT_ROW_SEPARATOR: String = "\n"
 
   def fromRawData(inputMatrix: Array[Array[Double]]): Matrix = {
     val nodesNumber = inputMatrix.length
